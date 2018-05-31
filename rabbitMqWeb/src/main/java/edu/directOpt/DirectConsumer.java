@@ -24,7 +24,7 @@ import edu.common.Constants;
  * @Copyright Copyright by Liuxing
  * @Direction 类说明	消费者，获取-----RabbitMQ，vhost 下面的 EXCHANGE交换器下面的QUEUE
  */
-public class ConsumerConfirm {
+public class DirectConsumer {
 
     public static void main(String[] args) throws IOException, TimeoutException,
             InterruptedException {
@@ -37,10 +37,10 @@ public class ConsumerConfirm {
         Channel channel = connection.createChannel();		//连接创建信道
         
         //交换器 四种交换器，direct、fanout、topic、handles			//绑定哪个交换器,理论上用命令去建
-        channel.exchangeDeclare( Constants.EXCHANGE_NAME , BuiltinExchangeType.DIRECT );
+        channel.exchangeDeclare( Constants.DIRECT_EXCHANGE_NAME , BuiltinExchangeType.DIRECT );
         //创建队列（就是所谓的路由键）消费者就只需要直接去取就可以了
         //channel.queueDeclare( CommonFactory.QUEUE_NAME, false, false, false, null);	
-        channel.queueBind( Constants.QUEUE_NAME ,Constants.EXCHANGE_NAME ,Constants.RoutingKey  );
+        channel.queueBind( Constants.DIRECT_QUEUE_NAME ,Constants.DIRECT_EXCHANGE_NAME ,Constants.DirectRoutingKey  );
         
         System.out.println("Waiting message.......");
 
@@ -65,7 +65,7 @@ public class ConsumerConfirm {
             }
         };
 
-        channel.basicConsume( Constants.QUEUE_NAME ,false,consumerB );
+        channel.basicConsume( Constants.DIRECT_QUEUE_NAME ,false,consumerB );
 
     }
 

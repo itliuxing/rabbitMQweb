@@ -18,9 +18,14 @@ public class Constants {
     public final static String VHOST = "/liuxing" ;						//虚拟地址（要绑定账户）
     
     
-    public final static String EXCHANGE_NAME = "direct_confirm_1";		//交换器
-    public final static String QUEUE_NAME = "error";					//队列名称
+    public final static String DIRECT_EXCHANGE_NAME = "direct_1";		//直连交换器
+    public final static String TOPIC_EXCHANGE_NAME = "topic_1";			//匹配交换器
+    public final static String DIRECT_QUEUE_NAME = "error";				//直连队列名称
+    public final static String TOPIC_QUEUE_NAME_A = "topic_a";			//匹配队列名称A
+    public final static String TOPIC_QUEUE_NAME_B = "topic_b";			//匹配队列名称B
     
-    public static String RoutingKey = "rabbitRoutingKey1" ;				//路由键--测试：
+    public static String DirectRoutingKey = "DirectRoutingKey1" ;		//路由键--直连
 
+    public static String TopicRoutingKey = "com.email.info" ;			//路由键--匹配
+    
 }

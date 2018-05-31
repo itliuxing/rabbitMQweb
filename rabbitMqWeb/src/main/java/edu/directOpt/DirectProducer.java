@@ -19,7 +19,7 @@ import edu.common.Constants;
  * @Copyright Copyright by Liuxing
  * @Direction 类说明		生产者--发送消息至RabbitMQ，vhost 下面的 EXCHANGE交换器下面的QUEUE
  */
-public class ProducerConfirm {
+public class DirectProducer {
 
     /*
     private final static String IP = "192.168.248.129" ;
@@ -50,8 +50,8 @@ public class ProducerConfirm {
         for(int i=0;i<10;i++){
             String message = "How much money do you have? I have "+(i+1) + " dollars.";
             //发布消息至RabbitMQ-->交换器的路由键上面去
-            channel.basicPublish( Constants.EXCHANGE_NAME,Constants.RoutingKey , null ,message.getBytes() );
-            System.out.println("Sent 数据至队列：" + Constants.QUEUE_NAME + " infos : "+message);
+            channel.basicPublish( Constants.DIRECT_EXCHANGE_NAME,Constants.DirectRoutingKey , null ,message.getBytes() );
+            System.out.println("Sent 数据至队列：" + Constants.DIRECT_QUEUE_NAME + " infos : "+message);
 
         }
 
