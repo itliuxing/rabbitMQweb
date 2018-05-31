@@ -20,12 +20,20 @@ public class Constants {
     
     public final static String DIRECT_EXCHANGE_NAME = "direct_1";		//直连交换器
     public final static String TOPIC_EXCHANGE_NAME = "topic_1";			//匹配交换器
+    public final static String FANOUT_EXCHANGE_NAME = "fanout_1";		//广播交换器
+    
+    
+    
     public final static String DIRECT_QUEUE_NAME = "error";				//直连队列名称
     public final static String TOPIC_QUEUE_NAME_A = "topic_a";			//匹配队列名称A
     public final static String TOPIC_QUEUE_NAME_B = "topic_b";			//匹配队列名称B
+    public final static String FANOUT_QUEUE_NAME_A = "fanout_a";		//匹配广播队列名称A
+    public final static String FANOUT_QUEUE_NAME_B = "fanout_b";		//匹配广播队列名称B
     
     public static String DirectRoutingKey = "DirectRoutingKey1" ;		//路由键--直连
 
     public static String TopicRoutingKey = "com.email.info" ;			//路由键--匹配
+    
+    public static String FanoutRoutingKey = "..." ;						//路由键--广播方式（不需要路由键）
     
 }

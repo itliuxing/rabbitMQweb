@@ -39,9 +39,10 @@ public class TopicConsumerB {
         Channel channel = connection.createChannel();		//连接创建信道
         
         //交换器 四种交换器，direct、fanout、topic、handles			//绑定哪个交换器,理论上用命令去建
-        channel.exchangeDeclare( Constants.TOPIC_EXCHANGE_NAME , BuiltinExchangeType.DIRECT );
+        channel.exchangeDeclare( Constants.TOPIC_EXCHANGE_NAME , BuiltinExchangeType.TOPIC );
         //创建队列（就是所谓的路由键）消费者就只需要直接去取就可以了
-        //channel.queueDeclare( CommonFactory.QUEUE_NAME, false, false, false, null);	
+        channel.queueDeclare( Constants.TOPIC_QUEUE_NAME_B, false, false, false, null);	
+        //队列绑定到交换器以及路由键上
         channel.queueBind( Constants.TOPIC_QUEUE_NAME_B ,Constants.TOPIC_EXCHANGE_NAME , RoutingKey  );
         
         System.out.println("Waiting '"+ RoutingKey +"' 路由键的队列  message.......");

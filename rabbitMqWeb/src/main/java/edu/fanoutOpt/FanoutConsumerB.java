@@ -1,4 +1,4 @@
-package edu.topicOpt;
+package edu.fanoutOpt;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -17,16 +17,16 @@ import edu.common.Constants;
 
 /**
  * 
- * @Class 	ConsumerConfirm.java
+ * @Class 	FanoutConsumerB.java
  * @Author 	作者姓名:Liuxing
  * @Version	1.0
- * @Date	创建时间：2018年5月29日 下午20:41:17
+ * @Date	创建时间：2018年5月31日 下午20:47:57
  * @Copyright Copyright by Liuxing
  * @Direction 类说明	消费者，获取-----RabbitMQ，vhost 下面的 EXCHANGE交换器下面的QUEUE
  */
-public class TopicConsumerA {
-
-	private static String RoutingKey = "com.*.info" ;
+public class FanoutConsumerB {
+	
+	private static String RoutingKey = "" ;
 
     public static void main(String[] args) throws IOException, TimeoutException,
             InterruptedException {
@@ -39,14 +39,14 @@ public class TopicConsumerA {
         Channel channel = connection.createChannel();		//连接创建信道
         
         //交换器 四种交换器，direct、fanout、topic、handles			//绑定哪个交换器,理论上用命令去建
-        channel.exchangeDeclare( Constants.TOPIC_EXCHANGE_NAME , BuiltinExchangeType.TOPIC );
+        channel.exchangeDeclare( Constants.FANOUT_EXCHANGE_NAME , BuiltinExchangeType.FANOUT );
         //创建队列（就是所谓的路由键）消费者就只需要直接去取就可以了
-        channel.queueDeclare( Constants.TOPIC_QUEUE_NAME_A, false, false, false, null);	
+        channel.queueDeclare( Constants.FANOUT_QUEUE_NAME_B, false, false, false, null);	
         //队列绑定到交换器以及路由键上
-        channel.queueBind( Constants.TOPIC_QUEUE_NAME_A ,Constants.TOPIC_EXCHANGE_NAME , RoutingKey  );
+        channel.queueBind( Constants.FANOUT_QUEUE_NAME_B ,Constants.FANOUT_EXCHANGE_NAME , RoutingKey  );
         
-        System.out.println("Waiting '"+ RoutingKey +"' 路由键的队列  message.......");
-        
+        System.out.println("Waiting fanout 广播机制的队列  message.......");
+
         Consumer consumerB = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
@@ -68,7 +68,7 @@ public class TopicConsumerA {
             }
         };
 
-        channel.basicConsume( Constants.TOPIC_QUEUE_NAME_A ,false,consumerB );
+        channel.basicConsume( Constants.FANOUT_QUEUE_NAME_B ,false,consumerB );
 
     }
 

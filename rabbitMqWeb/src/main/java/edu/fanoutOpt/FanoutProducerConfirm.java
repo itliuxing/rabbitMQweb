@@ -1,4 +1,4 @@
-package edu.topicOpt;
+package edu.fanoutOpt;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -12,14 +12,14 @@ import edu.common.CommonFactory;
 import edu.common.Constants;
 
 /**
- * @Class 	ProducerConfirm.java
+ * @Class 	FanoutProducerConfirm.java
  * @Author 	作者姓名:Liuxing
  * @Version	1.0
- * @Date	创建时间：2018年5月29日 下午20:59:36
+ * @Date	创建时间：2018年5月29日 下午21:15:36
  * @Copyright Copyright by Liuxing
  * @Direction 类说明		生产者--发送消息至RabbitMQ，vhost 下面的 EXCHANGE交换器下面的QUEUE
  */
-public class TopicProducerConfirm {
+public class FanoutProducerConfirm {
 
 
     public static void main(String[] args) throws IOException, TimeoutException,
@@ -40,7 +40,7 @@ public class TopicProducerConfirm {
         for(int i=0;i<10;i++){
             String message = " email send info: memnoy "+(i+1) + " dollars.";
             //发布消息至RabbitMQ-->交换器的路由键上面去
-            channel.basicPublish( Constants.TOPIC_EXCHANGE_NAME ,Constants.TopicRoutingKey , null ,message.getBytes() );
+            channel.basicPublish( Constants.FANOUT_EXCHANGE_NAME ,Constants.FanoutRoutingKey , null ,message.getBytes() );
             System.out.println("Sent 数据至队列： "+message);
 
         }
